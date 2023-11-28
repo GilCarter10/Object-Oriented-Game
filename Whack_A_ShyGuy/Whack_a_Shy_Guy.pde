@@ -1,24 +1,27 @@
 //variables
-int score;
+int score = 0;
 boolean beenClicked;
-String gameState;
+String gameState = "menu";
+float mX;
+float mY;
 ArrayList<ShyGuy> shyguysTop = new ArrayList<ShyGuy>();
 ArrayList<ShyGuy> shyguysMid = new ArrayList<ShyGuy>();
 ArrayList<ShyGuy> shyguysBot = new ArrayList<ShyGuy>();
 ArrayList<ShyGuy> shyguysFloor = new ArrayList<ShyGuy>();
-
+ShyGuy shyguyMenu = new ShyGuy();
 
 void setup(){
+  noCursor();
   size(400, 400);
   background(60, 162, 240);
-  score = 0;
-  gameState = "menu";
   
   for (int i = 0; i < 2; i++){
   shyguysTop.add(new ShyGuy());
   shyguysMid.add(new ShyGuy());
   shyguysBot.add(new ShyGuy());
   shyguysFloor.add(new ShyGuy());
+  
+  
   }
   
   for (ShyGuy part : shyguysTop) {
@@ -40,24 +43,36 @@ void draw(){
   switch (gameState) {
     case "menu":
       drawMenu();
+      break;
     case "play":
       drawPlay();
-    case "game over":
+      break;
+    case "gameOver":
       drawGameOver();
+      break;
   }
 }
 
 void drawMenu(){
-  
+  background(60, 162, 240);
+  drawLayer(300);
+  shyguyMenu.show(90, 273);
+  textSize(40);
+  text("Whack a Shy Guy", 65, 100);
+  textSize(20);
+  text("Click to start", 150, 155);
+  if (key == ' '){
+    gameState = "play";
+  }
 }
 
 void drawPlay(){
+  
   background(60, 162, 240);
   drawSun();
   fill(0);
   textSize(17);
   text("Score: "+ score, 10, 20); 
-  
 
   for (ShyGuy part : shyguysTop) {
     part.show(part.newX, 103);
@@ -80,6 +95,15 @@ void drawPlay(){
     part.show(part.newX, 373);
   }
   
+  mX = constrain(mouseX, 10, 390);
+  mY = constrain(mouseY, 10, 390);
+  ellipseMode(CENTER);
+  stroke(0, 255, 0);
+  strokeWeight(1.5);
+  noFill();
+  circle(mX, mY, 20);
+  line(mX, mY-20, mX, mY+20);
+  line(mX+20, mY, mX-20, mY);
   
   if (beenClicked){
     score += 1;
@@ -129,25 +153,33 @@ void drawSun(){
 
 
 void mousePressed() {
-  for (ShyGuy part : shyguysTop) {
-    if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46) {    
-      beenClicked = true;
+  if (gameState == "play"){
+    for (ShyGuy part : shyguysTop) {
+      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46) {    
+        beenClicked = true;
+      }
     }
-  }
-  for (ShyGuy part : shyguysMid) {
-    if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46) {    
-      beenClicked = true;
+    for (ShyGuy part : shyguysMid) {
+      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46) {    
+        beenClicked = true;
+      }
     }
-  }
-  for (ShyGuy part : shyguysBot) {
-    if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46) {    
-      beenClicked = true;
+    for (ShyGuy part : shyguysBot) {
+      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46) {    
+        beenClicked = true;
+      }
     }
-  }
-  for (ShyGuy part : shyguysFloor) {
-    if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46) {    
-      beenClicked = true;
+    for (ShyGuy part : shyguysFloor) {
+      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46) {    
+        beenClicked = true;
+      }
     }
+  } else if (gameState == "menu"){
+    gameState = "play";
   }
+  
+}
 
+
+void keyPressed() {
 }
