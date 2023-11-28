@@ -2,8 +2,9 @@
 class ShyGuy {
   
   PVector pos;
+  float newX;
   
-  void drawShyGuy(float x, float y){
+  void show(float x, float y){
     pos = new PVector(x, y);
     
     fill(219, 44, 24);
@@ -32,5 +33,25 @@ class ShyGuy {
     
     ellipse(pos.x, pos.y, 3, 3);
     
+    //hitbox
+    noFill();
+    //stroke(0,255,0);
+    rect(pos.x - 15, pos.y - 20, 30, 46);
   }
+  
+  float randomizeX(){
+    newX = random(50, 350);
+    return newX;
+  } 
+  
+  
+  void upAnimate(){
+
+  }
+  
+  void downAnimate(){
+    
+  }
+  
+  
 }

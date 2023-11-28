@@ -1,30 +1,95 @@
 //variables
-boolean ready;
-boolean play;
-boolean gameOver;
 int score;
+boolean beenClicked;
+String gameState;
+ArrayList<ShyGuy> shyguysTop = new ArrayList<ShyGuy>();
+ArrayList<ShyGuy> shyguysMid = new ArrayList<ShyGuy>();
+ArrayList<ShyGuy> shyguysBot = new ArrayList<ShyGuy>();
+ArrayList<ShyGuy> shyguysFloor = new ArrayList<ShyGuy>();
 
-ShyGuy shy1 = new ShyGuy();
-ShyGuy shy2 = new ShyGuy();
-ShyGuy shy3 = new ShyGuy();
-ShyGuy shy4 = new ShyGuy();
 
 void setup(){
   size(400, 400);
   background(60, 162, 240);
   score = 0;
+  gameState = "menu";
+  
+  for (int i = 0; i < 2; i++){
+  shyguysTop.add(new ShyGuy());
+  shyguysMid.add(new ShyGuy());
+  shyguysBot.add(new ShyGuy());
+  shyguysFloor.add(new ShyGuy());
+  }
+  
+  for (ShyGuy part : shyguysTop) {
+    part.randomizeX();
+  }
+  for (ShyGuy part : shyguysMid) {
+    part.randomizeX();
+  }
+  for (ShyGuy part : shyguysBot) {
+    part.randomizeX();
+  }
+  for (ShyGuy part : shyguysFloor) {
+    part.randomizeX();
+  }
+  
 }
 
 void draw(){
+  switch (gameState) {
+    case "menu":
+      drawMenu();
+    case "play":
+      drawPlay();
+    case "game over":
+      drawGameOver();
+  }
+}
+
+void drawMenu(){
+  
+}
+
+void drawPlay(){
   background(60, 162, 240);
   drawSun();
-  shy1.drawShyGuy(325, 103);
+  fill(0);
+  textSize(17);
+  text("Score: "+ score, 10, 20); 
+  
+
+  for (ShyGuy part : shyguysTop) {
+    part.show(part.newX, 103);
+  }
+  
   drawLayer(130); //top
-  shy2.drawShyGuy(250, 193);
+  
+  for (ShyGuy part : shyguysMid) {
+    part.show(part.newX, 193);
+  }
+  
   drawLayer(220); //medium
-  shy3.drawShyGuy(175, 284);
+
+  for (ShyGuy part : shyguysBot) {
+    part.show(part.newX, 284);
+  }
   drawLayer(310); //bottom
-  shy4.drawShyGuy(100, 373);
+
+  for (ShyGuy part : shyguysFloor) {
+    part.show(part.newX, 373);
+  }
+  
+  
+  if (beenClicked){
+    score += 1;
+    beenClicked = false;
+    println("I've been clicked!");
+  }
+}
+
+
+void drawGameOver(){
   
 }
 
@@ -48,6 +113,7 @@ void drawLayer(int y){
 
 void drawSun(){
   ellipseMode(CENTER);
+  noStroke();
   fill(247, 216, 15, 20);
   circle(360, 30, 200);
   
@@ -59,4 +125,29 @@ void drawSun(){
   
   fill(247, 216, 15, 255);
   circle(360, 30, 40);
+}
+
+
+void mousePressed() {
+  for (ShyGuy part : shyguysTop) {
+    if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46) {    
+      beenClicked = true;
+    }
+  }
+  for (ShyGuy part : shyguysMid) {
+    if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46) {    
+      beenClicked = true;
+    }
+  }
+  for (ShyGuy part : shyguysBot) {
+    if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46) {    
+      beenClicked = true;
+    }
+  }
+  for (ShyGuy part : shyguysFloor) {
+    if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46) {    
+      beenClicked = true;
+    }
+  }
+
 }
