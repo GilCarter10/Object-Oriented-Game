@@ -61,13 +61,11 @@ void drawMenu(){
   background(60, 162, 240);
   drawLayer(300);
   shyguyMenu.show(90);
+  shyguyMenu.hit = false;
   textSize(40);
   text("Whack a Shy Guy", 65, 100);
   textSize(20);
   text("Click to start", 150, 155);
-  if (key == ' '){
-    gameState = "play";
-  }
 }
 
 void drawPlay(){
@@ -114,11 +112,24 @@ void drawPlay(){
     beenClicked = false;
     println("I've been clicked!");
   }
+  
+  if (score == 10){
+    gameState = "gameOver";
+  }
+  
 }
 
 
 void drawGameOver(){
-  
+  background(60, 162, 240);
+  drawLayer(300);
+  shyguyMenu.show(90);
+  shyguyMenu.hit = true;
+  textSize(40);
+  text("GAME OVER", 105, 100);
+  textSize(20);
+  text("Click to return to menu", 105, 155);
+  score = 0;
 }
 
 void drawLayer(int y){
@@ -162,28 +173,34 @@ void mousePressed() {
       if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false) {    
         beenClicked = true;
         part.moveDown = true;
+        part.hit = true;
       }
     }
     for (ShyGuy part : shyguysMid) {
       if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false) {    
         beenClicked = true;
         part.moveDown = true;
+        part.hit = true;
       }
     }
     for (ShyGuy part : shyguysBot) {
       if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false) {    
         beenClicked = true;
         part.moveDown = true;
+        part.hit = true;
       }
     }
     for (ShyGuy part : shyguysFloor) {
       if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false) {    
         beenClicked = true;
         part.moveDown = true;
+        part.hit = true;
       }
     }
   } else if (gameState == "menu"){
     gameState = "play";
+  } else if (gameState == "gameOver"){
+    gameState = "menu";
   }
   
 }
