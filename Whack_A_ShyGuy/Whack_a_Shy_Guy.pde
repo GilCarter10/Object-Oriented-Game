@@ -15,25 +15,29 @@ void setup(){
   size(400, 400);
   background(60, 162, 240);
   
+  shyguyMenu.prep(" ");
+  
   for (int i = 0; i < 2; i++){
   shyguysTop.add(new ShyGuy());
   shyguysMid.add(new ShyGuy());
   shyguysBot.add(new ShyGuy());
   shyguysFloor.add(new ShyGuy());
-  
-  
   }
   
   for (ShyGuy part : shyguysTop) {
+    part.prep("top");
     part.randomizeX();
   }
   for (ShyGuy part : shyguysMid) {
+    part.prep("mid");
     part.randomizeX();
   }
   for (ShyGuy part : shyguysBot) {
+    part.prep("bot");
     part.randomizeX();
   }
   for (ShyGuy part : shyguysFloor) {
+    part.prep("floor");
     part.randomizeX();
   }
   
@@ -56,7 +60,7 @@ void draw(){
 void drawMenu(){
   background(60, 162, 240);
   drawLayer(300);
-  shyguyMenu.show(90, 273);
+  shyguyMenu.show(90);
   textSize(40);
   text("Whack a Shy Guy", 65, 100);
   textSize(20);
@@ -75,24 +79,24 @@ void drawPlay(){
   text("Score: "+ score, 10, 20); 
 
   for (ShyGuy part : shyguysTop) {
-    part.show(part.newX, 103);
+    part.show(part.newX);
   }
   
   drawLayer(130); //top
   
   for (ShyGuy part : shyguysMid) {
-    part.show(part.newX, 193);
+    part.show(part.newX);
   }
   
   drawLayer(220); //medium
 
   for (ShyGuy part : shyguysBot) {
-    part.show(part.newX, 284);
+    part.show(part.newX);
   }
   drawLayer(310); //bottom
 
   for (ShyGuy part : shyguysFloor) {
-    part.show(part.newX, 373);
+    part.show(part.newX);
   }
   
   mX = constrain(mouseX, 10, 390);
@@ -157,29 +161,29 @@ void mousePressed() {
     for (ShyGuy part : shyguysTop) {
       if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46) {    
         beenClicked = true;
+        part.downMove();
       }
     }
     for (ShyGuy part : shyguysMid) {
       if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46) {    
         beenClicked = true;
+        part.downMove();
       }
     }
     for (ShyGuy part : shyguysBot) {
       if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46) {    
         beenClicked = true;
+        part.downMove();
       }
     }
     for (ShyGuy part : shyguysFloor) {
       if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46) {    
         beenClicked = true;
+        part.downMove();
       }
     }
   } else if (gameState == "menu"){
     gameState = "play";
   }
   
-}
-
-
-void keyPressed() {
 }

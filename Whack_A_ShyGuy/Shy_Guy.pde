@@ -3,8 +3,29 @@ class ShyGuy {
   
   PVector pos;
   float newX;
+  float y;
   
-  void show(float x, float y){
+  void prep(String level){
+      switch(level){
+      case "top":
+        y = 103;
+        println("stop");
+        break;
+      case "mid":
+        y = 193;
+        break;
+      case "bot":
+        y = 284;
+        break;
+      case "floor":
+        y = 373;
+        break;
+      default:
+        y = 274;
+      }
+   }
+  
+  void show(float x){
     pos = new PVector(x, y);
     
     fill(219, 44, 24);
@@ -37,6 +58,8 @@ class ShyGuy {
     noFill();
     //stroke(0,255,0);
     rect(pos.x - 15, pos.y - 20, 30, 46);
+    
+  
   }
   
   float randomizeX(){
@@ -45,11 +68,15 @@ class ShyGuy {
   } 
   
   
-  void upAnimate(){
-
+  void upMove(){
+    
   }
   
-  void downAnimate(){
+  void downMove(){
+    for (int i = 0; i < 45; i++){
+      y ++;
+    }
+    //randomizeX();
     
   }
   
