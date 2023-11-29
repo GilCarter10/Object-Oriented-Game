@@ -159,27 +159,27 @@ void drawSun(){
 void mousePressed() {
   if (gameState == "play"){
     for (ShyGuy part : shyguysTop) {
-      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46) {    
+      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false) {    
         beenClicked = true;
-        part.downMove();
+        part.moveDown = true;
       }
     }
     for (ShyGuy part : shyguysMid) {
-      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46) {    
+      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false) {    
         beenClicked = true;
-        part.downMove();
+        part.moveDown = true;
       }
     }
     for (ShyGuy part : shyguysBot) {
-      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46) {    
+      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false) {    
         beenClicked = true;
-        part.downMove();
+        part.moveDown = true;
       }
     }
     for (ShyGuy part : shyguysFloor) {
-      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46) {    
+      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false) {    
         beenClicked = true;
-        part.downMove();
+        part.moveDown = true;
       }
     }
   } else if (gameState == "menu"){

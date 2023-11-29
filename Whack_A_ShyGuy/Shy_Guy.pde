@@ -4,12 +4,16 @@ class ShyGuy {
   PVector pos;
   float newX;
   float y;
+  boolean moveDown;
+  boolean moveUp;
+  float downGoal;
+  float upGoal;
   
   void prep(String level){
-      switch(level){
+    frameRate(100);
+    switch(level){
       case "top":
         y = 103;
-        println("stop");
         break;
       case "mid":
         y = 193;
@@ -23,6 +27,8 @@ class ShyGuy {
       default:
         y = 274;
       }
+      downGoal = y + 47;
+      upGoal = y;
    }
   
   void show(float x){
@@ -58,8 +64,22 @@ class ShyGuy {
     noFill();
     //stroke(0,255,0);
     rect(pos.x - 15, pos.y - 20, 30, 46);
-    
+
   
+    if (moveDown && y < downGoal){
+      y++;
+    } else if (y == downGoal){
+      moveDown = false;
+      randomizeX();
+      moveUp = true;
+    }
+  
+    if (moveUp && y > upGoal){
+      y--;
+    } else if (y == upGoal){
+      moveUp = false;
+    }
+
   }
   
   float randomizeX(){
@@ -72,13 +92,6 @@ class ShyGuy {
     
   }
   
-  void downMove(){
-    for (int i = 0; i < 45; i++){
-      y ++;
-    }
-    //randomizeX();
-    
-  }
   
   
 }
