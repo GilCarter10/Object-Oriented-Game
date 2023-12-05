@@ -109,7 +109,7 @@ class ShyGuy {
     
     if (moveDown && y < goal){
       y++;
-    } else if (y == goal){
+    } else if (moveDown && y == goal){
       moveDown = false;
       hidden = true;
       goal = y + 47;
@@ -122,7 +122,7 @@ class ShyGuy {
   
     if (moveUp && y > goal){
       y--;
-    } else if (y == goal){
+    } else if (moveUp && y == goal){
       moveUp = false;
       hidden = false;
       goal = y - 47;

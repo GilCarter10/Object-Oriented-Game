@@ -1,5 +1,6 @@
 //variables
 int score = 0;
+int keepTime = 0;
 boolean beenClicked;
 String gameState = "menu";
 String colour = "red";
@@ -15,6 +16,7 @@ void setup(){
   noCursor();
   size(400, 400);
   background(60, 162, 240);
+  frameCount = 60;
   
   shyguyMenu.prep(" ");
   
@@ -126,6 +128,25 @@ void drawPlay(){
   
   if (score == 10){
     gameState = "gameOver";
+  }
+  
+  
+  println(keepTime);
+  
+  
+  if (keepTime < 600){
+    keepTime ++;
+  }
+  if (keepTime == 300){
+    for (ShyGuy part : shyguysTop) {
+      part.moveUp = true;
+    }
+    
+  } else if (keepTime == 600){
+    for (ShyGuy part : shyguysTop) {
+      part.moveDown = true;
+    }
+    keepTime = 0;
   }
   
 }
