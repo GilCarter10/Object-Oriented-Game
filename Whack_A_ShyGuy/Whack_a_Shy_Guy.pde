@@ -67,6 +67,7 @@ void drawMenu(){
   changeColour(shyguyMenu);
   shyguyMenu.show(90);
   shyguyMenu.hit = false;
+  shyguyMenu.moveUp = false;
   textSize(40);
   text("Whack a Shy Guy", 65, 100);
   textSize(20);
@@ -230,28 +231,28 @@ void changeColour(ShyGuy part){
 void mousePressed() {
   if (gameState == "play"){
     for (ShyGuy part : shyguysTop) {
-      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false) {    
+      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false && part.hidden == false) {    
         beenClicked = true;
         part.moveDown = true;
         part.hit = true;
       }
     }
     for (ShyGuy part : shyguysMid) {
-      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false) {    
+      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false && part.hidden == false) {    
         beenClicked = true;
         part.moveDown = true;
         part.hit = true;
       }
     }
     for (ShyGuy part : shyguysBot) {
-      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false) {    
+      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false && part.hidden == false) {    
         beenClicked = true;
         part.moveDown = true;
         part.hit = true;
       }
     }
     for (ShyGuy part : shyguysFloor) {
-      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false) {    
+      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false && part.hidden == false) {    
         beenClicked = true;
         part.moveDown = true;
         part.hit = true;

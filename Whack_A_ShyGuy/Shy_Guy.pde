@@ -4,11 +4,11 @@ class ShyGuy {
   PVector pos;
   float newX;
   float y;
-  boolean moveDown;
-  boolean moveUp;
+  boolean moveDown = false;
+  boolean moveUp = false;
   boolean hit;
-  float downGoal;
-  float upGoal;
+  boolean hidden = true;
+  float goal;
   int[] colourCodes;
   int[] red = { 219, 44, 24 };
   int[] turq = { 59, 219, 174 };
@@ -22,22 +22,21 @@ class ShyGuy {
     frameRate(100);
     switch(level){
       case "top":
-        y = 103;
+        y = 150;
         break;
       case "mid":
-        y = 193;
+        y = 240;
         break;
       case "bot":
-        y = 284;
+        y = 331;
         break;
       case "floor":
-        y = 373;
+        y = 420;
         break;
       default:
         y = 274;
       }
-      downGoal = y + 47;
-      upGoal = y;
+      goal = y - 47;
    }
   
   void show(float x){
@@ -108,19 +107,25 @@ class ShyGuy {
       ellipse(pos.x, pos.y, 3, 3);
     }
     
-    if (moveDown && y < downGoal){
+    if (moveDown && y < goal){
       y++;
-    } else if (y == downGoal){
+    } else if (y == goal){
       moveDown = false;
+      hidden = true;
+      goal = y + 47;
+      
+      //RESET
       randomizeX();
-      moveUp = true;
       hit = false;
+      //moveUp = true;
     }
   
-    if (moveUp && y > upGoal){
+    if (moveUp && y > goal){
       y--;
-    } else if (y == upGoal){
+    } else if (y == goal){
       moveUp = false;
+      hidden = false;
+      goal = y - 47;
     }
 
   }
@@ -129,7 +134,5 @@ class ShyGuy {
     newX = random(50, 350);
     return newX;
   } 
-
-  
   
 }
