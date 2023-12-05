@@ -9,6 +9,14 @@ class ShyGuy {
   boolean hit;
   float downGoal;
   float upGoal;
+  int[] colourCodes;
+  int[] red = { 219, 44, 24 };
+  int[] turq = { 59, 219, 174 };
+  int[] black = { 55, 55, 55 };
+  int[] purple = { 125, 32, 201 };
+  int[] orange = { 235, 165, 26 };
+  int[] grey = { 115, 115, 115 };
+  int[] salmon = { 230, 165, 189 };
   
   void prep(String level){
     frameRate(100);
@@ -35,7 +43,7 @@ class ShyGuy {
   void show(float x){
     pos = new PVector(x, y);
     
-    fill(219, 44, 24);
+    fill(colourCodes[0], colourCodes[1], colourCodes[2]);
     rect(pos.x - 13.5, pos.y, 30, 27);
     ellipseMode(CORNER);
     ellipse(pos.x - 13.5, pos.y - 20, 30, 35);
@@ -68,7 +76,7 @@ class ShyGuy {
 
     
     if (hit){
-      fill(219, 44, 24);
+      fill(colourCodes[0], colourCodes[1], colourCodes[2]);
       rect(pos.x - 13.5, pos.y, 30, 27);
       ellipseMode(CORNER);
       ellipse(pos.x - 13.5, pos.y - 20, 30, 35);

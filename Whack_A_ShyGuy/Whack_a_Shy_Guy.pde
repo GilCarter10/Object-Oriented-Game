@@ -2,6 +2,7 @@
 int score = 0;
 boolean beenClicked;
 String gameState = "menu";
+String colour = "red";
 float mX;
 float mY;
 ArrayList<ShyGuy> shyguysTop = new ArrayList<ShyGuy>();
@@ -54,12 +55,16 @@ void draw(){
     case "gameOver":
       drawGameOver();
       break;
+    case "colourMenu":
+      drawColourMenu();
+      break;
   }
 }
 
 void drawMenu(){
   background(60, 162, 240);
   drawLayer(300);
+  changeColour(shyguyMenu);
   shyguyMenu.show(90);
   shyguyMenu.hit = false;
   textSize(40);
@@ -77,23 +82,28 @@ void drawPlay(){
   text("Score: "+ score, 10, 20); 
 
   for (ShyGuy part : shyguysTop) {
+    changeColour(part);
     part.show(part.newX);
   }
   
   drawLayer(130); //top
   
   for (ShyGuy part : shyguysMid) {
+    changeColour(part);
     part.show(part.newX);
   }
   
   drawLayer(220); //medium
 
   for (ShyGuy part : shyguysBot) {
+    changeColour(part);  
     part.show(part.newX);
   }
+  
   drawLayer(310); //bottom
 
   for (ShyGuy part : shyguysFloor) {
+    changeColour(part);    
     part.show(part.newX);
   }
   
@@ -123,14 +133,37 @@ void drawPlay(){
 void drawGameOver(){
   background(60, 162, 240);
   drawLayer(300);
-  shyguyMenu.show(90);
+  changeColour(shyguyMenu);
+  shyguyMenu.show(330);
   shyguyMenu.hit = true;
   textSize(40);
   text("GAME OVER", 105, 100);
   textSize(20);
   text("Click to return to menu", 105, 155);
+  text("Press space to change Shy Guy Colour", 45, 200);
   score = 0;
 }
+
+void drawColourMenu(){
+  background(60, 162, 240);
+  drawLayer(300);
+  changeColour(shyguyMenu);
+  shyguyMenu.show(200);
+  shyguyMenu.hit = false;
+  textSize(40);
+  text("Colour Menu", 96, 50);
+  textSize(15);
+  text("Press 'r' for Red", 150, 90);
+  text("Press 't' for Turquoise", 130, 110);
+  text("Press 'b' for Black", 143, 130);
+  text("Press 'p' for Purple", 141, 150);
+  text("Press 'o' for Orange", 142, 170);
+  text("Press 'g' for Grey", 143, 190);
+  text("Press 's' for Salmon", 136, 210);
+  text("Press Space to return to Menu", 109, 230);
+  
+}
+
 
 void drawLayer(int y){
   fill(209, 188, 144);
@@ -164,6 +197,33 @@ void drawSun(){
   
   fill(247, 216, 15, 255);
   circle(360, 30, 40);
+}
+
+
+void changeColour(ShyGuy part){
+  switch (colour) {
+    case "red":
+      part.colourCodes = part.red;
+      break;
+    case "turq":
+      part.colourCodes = part.turq;
+      break;
+    case "black":
+      part.colourCodes = part.black;
+      break;
+    case "purple":
+      part.colourCodes = part.purple;
+      break;
+    case "orange":
+      part.colourCodes = part.orange;
+      break;
+    case "grey":
+      part.colourCodes = part.grey;
+      break;
+    case "salmon":
+      part.colourCodes = part.salmon;
+      break;
+  }
 }
 
 
@@ -203,4 +263,35 @@ void mousePressed() {
     gameState = "menu";
   }
   
+}
+
+void keyPressed() {
+  if (gameState == "gameOver" && key == ' '){
+    gameState = "colourMenu";
+  } else if (gameState == "colourMenu"){
+    if (key == ' '){
+      gameState = "menu";
+    }
+    if (key == 'r'){
+      colour = "red";
+    }
+    if (key == 'b'){
+      colour = "black";
+    }
+    if (key == 't'){
+      colour = "turq";
+    }
+    if (key == 'p'){
+      colour = "purple";
+    }
+    if (key == 'o'){
+      colour = "orange";
+    }
+    if (key == 'g'){
+      colour = "grey";
+    }
+    if (key == 's'){
+      colour = "salmon";
+    }
+  }
 }
