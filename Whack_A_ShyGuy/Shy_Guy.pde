@@ -4,11 +4,13 @@ class ShyGuy {
   PVector pos;
   float newX;
   float y;
+  float upGoal;
+  float downGoal;
   boolean moveDown = false;
   boolean moveUp = false;
   boolean hit;
   boolean hidden = true;
-  float goal;
+  String Level;
   int[] colourCodes;
   int[] red = { 219, 44, 24 };
   int[] turq = { 59, 219, 174 };
@@ -20,23 +22,34 @@ class ShyGuy {
   
   void prep(String level){
     frameRate(100);
+    Level = level;
     switch(level){
       case "top":
         y = 150;
+        upGoal = 103;
+        downGoal = 150;
         break;
       case "mid":
         y = 240;
+        upGoal = 193;
+        downGoal = 240;
         break;
       case "bot":
         y = 331;
+        upGoal = 284;
+        downGoal = 331;
         break;
       case "floor":
         y = 420;
+        upGoal = 373;
+        downGoal = 420;
         break;
       default:
         y = 274;
+        upGoal = 0;
+        downGoal = 0;
       }
-      goal = y - 47;
+      
    }
   
   void show(float x){
@@ -107,32 +120,34 @@ class ShyGuy {
       ellipse(pos.x, pos.y, 3, 3);
     }
     
-    if (moveDown && y < goal){
+    
+    if (moveUp && y > upGoal){
+      y--;
+    } else if (moveUp && y == upGoal){
+      moveUp = false;
+      hidden = false;
+    }
+    
+    if (moveDown && y < downGoal){
       y++;
-    } else if (moveDown && y == goal){
+    } else if (moveDown && y == downGoal){
       moveDown = false;
       hidden = true;
-      goal = y + 47;
       
       //RESET
       randomizeX();
       hit = false;
-      //moveUp = true;
+
     }
   
-    if (moveUp && y > goal){
-      y--;
-    } else if (moveUp && y == goal){
-      moveUp = false;
-      hidden = false;
-      goal = y - 47;
-    }
 
   }
   
   float randomizeX(){
     newX = random(50, 350);
+    
     return newX;
-  } 
+  }
   
+
 }

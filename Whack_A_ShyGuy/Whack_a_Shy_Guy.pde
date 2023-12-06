@@ -1,5 +1,6 @@
 //variables
 int score = 0;
+int misses = 0;
 int keepTime = 0;
 boolean beenClicked;
 String gameState = "menu";
@@ -20,11 +21,16 @@ void setup(){
   
   shyguyMenu.prep(" ");
   
-  for (int i = 0; i < 2; i++){
-  shyguysTop.add(new ShyGuy());
-  shyguysMid.add(new ShyGuy());
-  shyguysBot.add(new ShyGuy());
-  shyguysFloor.add(new ShyGuy());
+  for (int i = 0; i < 1; i++){
+    shyguysTop.add(new ShyGuy());
+    shyguysFloor.add(new ShyGuy());
+    shyguysMid.add(new ShyGuy());
+    shyguysBot.add(new ShyGuy());
+    for (int j = 0; j < 2; j++){
+      shyguysMid.add(new ShyGuy());
+      shyguysBot.add(new ShyGuy());
+
+    }
   }
   
   for (ShyGuy part : shyguysTop) {
@@ -83,6 +89,7 @@ void drawPlay(){
   fill(0);
   textSize(17);
   text("Score: "+ score, 10, 20); 
+  text("Misses: "+ misses, 100, 20); 
 
   for (ShyGuy part : shyguysTop) {
     changeColour(part);
@@ -110,8 +117,8 @@ void drawPlay(){
     part.show(part.newX);
   }
   
-  mX = constrain(mouseX, 10, 390);
-  mY = constrain(mouseY, 10, 390);
+  mX = constrain(mouseX, 30, 370);
+  mY = constrain(mouseY, 30, 370);
   ellipseMode(CENTER);
   stroke(0, 255, 0);
   strokeWeight(1.5);
@@ -126,28 +133,51 @@ void drawPlay(){
     println("I've been clicked!");
   }
   
-  if (score == 10){
-    gameState = "gameOver";
-  }
-  
-  
   println(keepTime);
   
   
-  if (keepTime < 600){
+  if (keepTime < 360){
     keepTime ++;
   }
-  if (keepTime == 300){
+  if (keepTime == 180){
     for (ShyGuy part : shyguysTop) {
       part.moveUp = true;
     }
+    for (ShyGuy part : shyguysMid) {
+      part.moveUp = true;
+    }
+    for (ShyGuy part : shyguysBot) {
+      part.moveUp = true;
+    }
+    for (ShyGuy part : shyguysFloor) {
+      part.moveUp = true;
+    }
     
-  } else if (keepTime == 600){
+  } else if (keepTime == 360){
     for (ShyGuy part : shyguysTop) {
       part.moveDown = true;
+      misses += 1;
+    }
+    for (ShyGuy part : shyguysMid) {
+      part.moveDown = true;
+      misses += 1;
+    }
+    for (ShyGuy part : shyguysBot) {
+      part.moveDown = true;
+      misses += 1;
+    }
+    for (ShyGuy part : shyguysFloor) {
+      part.moveDown = true;
+      misses += 1;
     }
     keepTime = 0;
   }
+  
+  
+  if (misses >= 10){
+    gameState = "gameOver";
+  }
+  
   
 }
 
@@ -164,6 +194,7 @@ void drawGameOver(){
   text("Click to return to menu", 105, 155);
   text("Press space to change Shy Guy Colour", 45, 200);
   score = 0;
+  misses = 0;
 }
 
 void drawColourMenu(){
@@ -199,7 +230,8 @@ void drawLayer(int y){
     fill(19, 145, 34);
     triangle(0 + i, 20 + y, 20 + i, 20 + y, 10 + i, 35 + y);
   }
-  for (int i = 20; i < 400; i += 40){
+  
+  for (int i = 20; i < 400; i += 40){  
     fill(41, 171, 57);
     triangle(0 + i, 20 + y, 20 + i, 20 + y, 10 + i, 40 + y);
   }
