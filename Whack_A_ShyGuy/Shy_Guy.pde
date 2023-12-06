@@ -139,13 +139,12 @@ class ShyGuy {
       hit = false;
 
     }
-  
+   
 
   }
   
   float randomizeX(){
-    newX = random(50, 350);
-    
+    newX = random(50, 350);      
     return newX;
   }
   
