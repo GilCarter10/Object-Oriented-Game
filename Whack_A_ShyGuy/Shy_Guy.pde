@@ -140,6 +140,22 @@ class ShyGuy {
 
     }
    
+   for (ShyGuy part : shyguysMid){
+      if(pos.x != part.pos.x){ 
+        if ((pos.x < part.pos.x + 20) && (pos.x > part.pos.x - 20)){
+          randomizeX();
+        }
+      }
+    }
+    
+    for (ShyGuy part : shyguysBot){
+      if(pos.x != part.pos.x){ 
+        if ((pos.x < part.pos.x + 20) && (pos.x > part.pos.x - 20)){
+          randomizeX();
+        }
+      }
+    }
+   
 
   }
   
