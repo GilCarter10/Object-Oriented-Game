@@ -139,28 +139,41 @@ class ShyGuy {
       hit = false;
 
     }
+
    
-   for (ShyGuy part : shyguysMid){
-      if(pos.x != part.pos.x){ 
-        if ((pos.x < part.pos.x + 20) && (pos.x > part.pos.x - 20)){
-          randomizeX();
-        }
-      }
-    }
-    
-    for (ShyGuy part : shyguysBot){
-      if(pos.x != part.pos.x){ 
-        if ((pos.x < part.pos.x + 20) && (pos.x > part.pos.x - 20)){
-          randomizeX();
-        }
-      }
-    }
    
+   /*
+    switch (Level){
+      case "mid":
+        for (ShyGuy part : shyguysMid){
+          if(pos.x != part.pos.x){ 
+            if ((pos.x < part.pos.x + 10) && (pos.x > part.pos.x - 10)){
+              newX = random(50, 350);
+            }
+          }
+        }
+        break;
+        
+      case "bot":
+        for (ShyGuy part : shyguysBot){
+          if(pos.x != part.pos.x){ 
+            if ((pos.x < part.pos.x + 10) && (pos.x > part.pos.x - 10)){
+              newX = random(50, 350);
+            }
+          }
+        }
+        break;
+    }
+  
+   */
 
   }
   
+
+
+  
   float randomizeX(){
-    newX = random(50, 350);      
+    newX = random(50, 350);   
     return newX;
   }
   

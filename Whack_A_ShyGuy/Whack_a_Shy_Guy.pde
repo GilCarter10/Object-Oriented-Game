@@ -1,5 +1,6 @@
 //variables
 int score = 0;
+int highscore = 0;
 int misses = 0;
 int keepTime = 0;
 boolean beenClicked;
@@ -79,7 +80,9 @@ void drawMenu(){
   textSize(40);
   text("Whack a Shy Guy", 65, 100);
   textSize(20);
-  text("Click to start", 150, 155);
+  text("Highscore: " + highscore, 151, 135);
+  text("Click to start", 150, 200);
+  
 }
 
 void drawPlay(){
@@ -133,10 +136,9 @@ void drawPlay(){
     println("I've been clicked!");
   }
   
-  println(keepTime);
   
   
-  if (keepTime < 360){
+  if (keepTime < 600){
     keepTime ++;
   }
   if (keepTime == 180){
@@ -153,31 +155,42 @@ void drawPlay(){
       part.moveUp = true;
     }
     
-  } else if (keepTime == 360){
+  } else if (keepTime == 600){
     for (ShyGuy part : shyguysTop) {
-      part.moveDown = true;
-      misses += 1;
+      if (part.moveDown == false){
+        part.moveDown = true;
+        misses += 1;
+      }
     }
     for (ShyGuy part : shyguysMid) {
-      part.moveDown = true;
-      misses += 1;
+      if (part.moveDown == false){
+        part.moveDown = true;
+        misses += 1;
+      }
     }
     for (ShyGuy part : shyguysBot) {
-      part.moveDown = true;
-      misses += 1;
+      if (part.moveDown == false){
+        part.moveDown = true;
+        misses += 1;
+      }
     }
     for (ShyGuy part : shyguysFloor) {
-      part.moveDown = true;
-      misses += 1;
+      if (part.moveDown == false){
+        part.moveDown = true;
+        misses += 1;
+      }
     }
     keepTime = 0;
   }
   
   
-  if (misses >= 10){
+  if (misses >= 15){
     gameState = "gameOver";
   }
   
+  if (score > highscore){
+    highscore = score;
+  }
   
 }
 
@@ -191,8 +204,8 @@ void drawGameOver(){
   textSize(40);
   text("GAME OVER", 105, 100);
   textSize(20);
-  text("Click to return to menu", 105, 155);
-  text("Press space to change Shy Guy Colour", 45, 200);
+  text("Press space to return to menu", 82, 155);
+  text("Press C to change Shy Guy Colour", 68, 200);
   score = 0;
   misses = 0;
 }
@@ -313,14 +326,14 @@ void mousePressed() {
     }
   } else if (gameState == "menu"){
     gameState = "play";
-  } else if (gameState == "gameOver"){
-    gameState = "menu";
   }
   
 }
 
 void keyPressed() {
   if (gameState == "gameOver" && key == ' '){
+    gameState = "menu";
+  } else if (gameState == "gameOver" && (key == 'c' || key == 'C')){
     gameState = "colourMenu";
   } else if (gameState == "colourMenu"){
     if (key == ' '){
