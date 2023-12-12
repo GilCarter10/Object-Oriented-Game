@@ -1,7 +1,7 @@
 
-class ShyGuy {
+class ShyGuy {  //Skill #28
   
-  PVector pos;
+  PVector pos;  //Skill #38
   float newX;
   float y;
   float upGoal;
@@ -12,7 +12,7 @@ class ShyGuy {
   boolean hidden = true;
   String Level;
   int[] colourCodes;
-  int[] red = { 219, 44, 24 };
+  int[] red = { 219, 44, 24 }; //Skill #33
   int[] turq = { 59, 219, 174 };
   int[] black = { 55, 55, 55 };
   int[] purple = { 125, 32, 201 };
@@ -20,7 +20,7 @@ class ShyGuy {
   int[] grey = { 115, 115, 115 };
   int[] salmon = { 230, 165, 189 };
   
-  void prep(String level){
+  void prep(String level){  //Skill #30
     frameRate(100);
     Level = level;
     switch(level){
@@ -55,9 +55,9 @@ class ShyGuy {
   void show(float x){
     pos = new PVector(x, y);
     
-    fill(colourCodes[0], colourCodes[1], colourCodes[2]);
-    rect(pos.x - 13.5, pos.y, 30, 27);
-    ellipseMode(CORNER);
+    fill(colourCodes[0], colourCodes[1], colourCodes[2]);  //Skill #2
+    rect(pos.x - 13.5, pos.y, 30, 27);  //Skill #1
+    ellipseMode(CORNER);  //Skill #3
     ellipse(pos.x - 13.5, pos.y - 20, 30, 35);
     triangle(pos.x - 13.5, pos.y + 22, pos.x - 16.5, pos.y + 27, pos.x - 13.5, pos.y + 27);
     triangle(pos.x + 16.5, pos.y + 22, pos.x + 19.5, pos.y + 27, pos.x + 16.5, pos.y + 27);
@@ -122,7 +122,7 @@ class ShyGuy {
     
     
     if (moveUp && y > upGoal){
-      y--;
+      y--;  //Skill #8
     } else if (moveUp && y == upGoal){
       moveUp = false;
       hidden = false;
@@ -172,7 +172,7 @@ class ShyGuy {
 
 
   
-  float randomizeX(){
+  float randomizeX(){   //Skill #21
     newX = random(50, 350);   
     return newX;
   }

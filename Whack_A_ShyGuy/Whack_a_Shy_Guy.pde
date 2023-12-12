@@ -1,5 +1,5 @@
 //variables
-int score = 0;
+int score = 0;  //Skill #10
 int highscore = 0;
 int misses = 0;
 int keepTime = 0;
@@ -8,22 +8,23 @@ String gameState = "menu";
 String colour = "red";
 float mX;
 float mY;
-ArrayList<ShyGuy> shyguysTop = new ArrayList<ShyGuy>();
+ArrayList<ShyGuy> shyguysTop = new ArrayList<ShyGuy>();  //Skill #34
 ArrayList<ShyGuy> shyguysMid = new ArrayList<ShyGuy>();
 ArrayList<ShyGuy> shyguysBot = new ArrayList<ShyGuy>();
 ArrayList<ShyGuy> shyguysFloor = new ArrayList<ShyGuy>();
 ShyGuy shyguyMenu = new ShyGuy();
 
-void setup(){
+void setup(){  //Skill #4
   noCursor();
   size(400, 400);
-  background(60, 162, 240);
+  background(60, 162, 240);  //Skill #5
   frameCount = 60;
   
   shyguyMenu.prep(" ");
   
-  for (int i = 0; i < 1; i++){
-    shyguysTop.add(new ShyGuy());
+  //Skill #17
+  for (int i = 0; i < 1; i++){  //Skill #9
+    shyguysTop.add(new ShyGuy()); //Skill #34
     shyguysFloor.add(new ShyGuy());
     shyguysMid.add(new ShyGuy());
     shyguysBot.add(new ShyGuy());
@@ -34,8 +35,8 @@ void setup(){
     }
   }
   
-  for (ShyGuy part : shyguysTop) {
-    part.prep("top");
+  for (ShyGuy part : shyguysTop) {  //Skill #16
+    part.prep("top"); //Skill #35
     part.randomizeX();
   }
   for (ShyGuy part : shyguysMid) {
@@ -54,10 +55,10 @@ void setup(){
 }
 
 void draw(){
-  switch (gameState) {
+  switch (gameState) {  //Skill #15
     case "menu":
       drawMenu();
-      break;
+      break;  //Skill #18
     case "play":
       drawPlay();
       break;
@@ -70,7 +71,7 @@ void draw(){
   }
 }
 
-void drawMenu(){
+void drawMenu(){  //Skill #20
   background(60, 162, 240);
   drawLayer(300);
   changeColour(shyguyMenu);
@@ -96,14 +97,14 @@ void drawPlay(){
 
   for (ShyGuy part : shyguysTop) {
     changeColour(part);
-    part.show(part.newX);
+    part.show(part.newX);  //Skill #29
   }
   
   drawLayer(130); //top
   
   for (ShyGuy part : shyguysMid) {
     changeColour(part);
-    part.show(part.newX);
+    part.show(part.newX); 
   }
   
   drawLayer(220); //medium
@@ -120,7 +121,7 @@ void drawPlay(){
     part.show(part.newX);
   }
   
-  mX = constrain(mouseX, 30, 370);
+  mX = constrain(mouseX, 30, 370);  //Skill #6
   mY = constrain(mouseY, 30, 370);
   ellipseMode(CENTER);
   stroke(0, 255, 0);
@@ -130,15 +131,15 @@ void drawPlay(){
   line(mX, mY-20, mX, mY+20);
   line(mX+20, mY, mX-20, mY);
   
-  if (beenClicked){
+  if (beenClicked){  //Skill #12
     score += 1;
     beenClicked = false;
-    println("I've been clicked!");
+    println("I've been clicked!");  //Skill #11
   }
   
   
   
-  if (keepTime < 600){
+  if (keepTime < 600){  //Skill #13
     keepTime ++;
   }
   if (keepTime == 180){
@@ -294,10 +295,10 @@ void changeColour(ShyGuy part){
 }
 
 
-void mousePressed() {
+void mousePressed() {  //Skill #7
   if (gameState == "play"){
     for (ShyGuy part : shyguysTop) {
-      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false && part.hidden == false) {    
+      if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false && part.hidden == false) {    //Skill #14
         beenClicked = true;
         part.moveDown = true;
         part.hit = true;
