@@ -3,6 +3,7 @@ int score = 0;  //Skill #10
 int highscore = 0;
 int misses = 0;
 int keepTime = 0;
+int totalShyGuys;
 boolean beenClicked;
 String gameState = "menu";
 String colour = "red";
@@ -78,11 +79,13 @@ void drawMenu(){  //Skill #20
   shyguyMenu.show(90);
   shyguyMenu.hit = false;
   shyguyMenu.moveUp = false;
+  totalShyGuys = shyguysTop.size() + shyguysMid.size() + shyguysBot.size() + shyguysFloor.size(); //Skill #36
   textSize(40);
-  text("Whack a Shy Guy", 65, 100);
+  text("Whack a Shy Guy", 63, 100);
   textSize(20);
-  text("Highscore: " + highscore, 151, 135);
-  text("Click to start", 150, 200);
+  text("Can you get all " + totalShyGuys + " of them?", 94, 130);
+  text("Highscore: " + highscore, 151, 175);
+  text("Click to start", 150, 240);
   
 }
 
@@ -94,6 +97,7 @@ void drawPlay(){
   textSize(17);
   text("Score: "+ score, 10, 20); 
   text("Misses: "+ misses, 100, 20); 
+  
 
   for (ShyGuy part : shyguysTop) {
     changeColour(part);
@@ -158,25 +162,25 @@ void drawPlay(){
     
   } else if (keepTime == 600){
     for (ShyGuy part : shyguysTop) {
-      if (part.moveDown == false){
+      if (part.hidden == false){
         part.moveDown = true;
         misses += 1;
       }
     }
     for (ShyGuy part : shyguysMid) {
-      if (part.moveDown == false){
+      if (part.hidden == false){
         part.moveDown = true;
         misses += 1;
       }
     }
     for (ShyGuy part : shyguysBot) {
-      if (part.moveDown == false){
+      if (part.hidden == false){
         part.moveDown = true;
         misses += 1;
       }
     }
     for (ShyGuy part : shyguysFloor) {
-      if (part.moveDown == false){
+      if (part.hidden == false){
         part.moveDown = true;
         misses += 1;
       }
@@ -268,7 +272,7 @@ void drawSun(){
 }
 
 
-void changeColour(ShyGuy part){
+void changeColour(ShyGuy part){  //Skill #24
   switch (colour) {
     case "red":
       part.colourCodes = part.red;
