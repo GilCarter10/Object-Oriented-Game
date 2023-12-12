@@ -1,0 +1,36 @@
+Skill #19: What’s the difference between a for loop and a while loop?
+In processing a for loop will loop the number of times that is determined by variable conditions set in the for loop statement. 
+Whereas a while loop will loop until the conidition is proven false. While loops are especially helpful when using booleans and 
+for loops are better used for int's and float's. For example the loop " for (int i = 0; i < 3; i++){ " would be looped 3 times and 
+the loop " while (play) { " would be looped until the boolean play is false.
+
+Skill #22: What’s the difference between parameters and arguments?
+Parameters are the variables that are assigned to a function and called when youa are creting that function. Parameters themselves never 
+have concrete values but are rather the placeholder for the argument when the function is called. Arguments are the variables used in a function
+that are defined when the function is called. The argument replaces the parameter wherever it is called.
+
+Skill #25: What’s the difference between a class and an object?
+A class is different from an object because a class is the template or guideline that is used to make an object. Every object has a parent
+class that defines its traits and boundaries. To use a common anolgy, the class would be the cookie cutter and the objects are the cookies.
+
+Skill #26: What is a constructor function? What does it do and when?
+
+
+Skill #27: Why should each class have its own tab in Processing?
+
+
+Skill #31: What’s the difference between an array and an ArrayList?
+An array depicts a way to store a fixed number values. The values in an array must all be of the same type (int, float, char, string).
+Arrays have a confined size that is declared. An ArrayList is very similar to an array but it is much more dynamic and flexible. 
+ArrayLists are able to hold objects and do not have a definite size. You are able to freely add and remove things from an ArrayList unlike in an array.
+
+Skill #32: Why would you want to go through a list backwards, decrementing the index?
+
+
+Skill #37: When should you use PVector instead of float variables?
+You should use PVector rather than float variables if there is ever a time when you have variables related to each other that would be better stored as one combined vector.
+The most common example of this is in position, speed, and acceleration. PVector can be used to store values for these in a vector format (a vector being something with direction and magnitude)
+PVectors can be two or three dimensional to fit your needs.
+
+Skill #42: What is a normalized vector, why is it useful?
+
