@@ -136,7 +136,7 @@ void drawPlay(){
   line(mX+20, mY, mX-20, mY);
   
   if (beenClicked){  //Skill #12
-    score += 1;
+    //score += 1;
     beenClicked = false;
     println("I've been clicked!");  //Skill #11
   }
@@ -303,6 +303,7 @@ void mousePressed() {  //Skill #7
   if (gameState == "play"){
     for (ShyGuy part : shyguysTop) {
       if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false && part.hidden == false) {    //Skill #14
+        score += 1;
         beenClicked = true;
         part.moveDown = true;
         part.hit = true;
@@ -310,6 +311,7 @@ void mousePressed() {  //Skill #7
     }
     for (ShyGuy part : shyguysMid) {
       if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false && part.hidden == false) {    
+        score += 1;
         beenClicked = true;
         part.moveDown = true;
         part.hit = true;
@@ -317,6 +319,7 @@ void mousePressed() {  //Skill #7
     }
     for (ShyGuy part : shyguysBot) {
       if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false && part.hidden == false) {    
+        score += 1;
         beenClicked = true;
         part.moveDown = true;
         part.hit = true;
@@ -324,6 +327,42 @@ void mousePressed() {  //Skill #7
     }
     for (ShyGuy part : shyguysFloor) {
       if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false && part.hidden == false) {    
+        score += 1;
+        beenClicked = true;
+        part.moveDown = true;
+        part.hit = true;
+      }
+    }
+    
+    
+    for (ShyGuy part : shyguysTop) {
+      if (dist(part.pos.x, part.pos.y, mouseX, mouseY) < 13) {   //Skill 40
+        score += 2;
+        beenClicked = true;
+        part.moveDown = true;
+        part.hit = true;
+        println("shaun");
+      }
+    }
+    for (ShyGuy part : shyguysMid) {
+      if (dist(part.pos.x, part.pos.y, mouseX, mouseY) < 13) {    
+        score += 2;
+        beenClicked = true;
+        part.moveDown = true;
+        part.hit = true;
+      }
+    }
+    for (ShyGuy part : shyguysBot) {
+      if (dist(part.pos.x, part.pos.y, mouseX, mouseY) < 13) {    
+        score += 2;
+        beenClicked = true;
+        part.moveDown = true;
+        part.hit = true;
+      }
+    }
+    for (ShyGuy part : shyguysFloor) {
+      if (dist(part.pos.x, part.pos.y, mouseX, mouseY) < 13) {    
+        score += 2;
         beenClicked = true;
         part.moveDown = true;
         part.hit = true;

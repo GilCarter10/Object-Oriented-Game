@@ -2,10 +2,9 @@
 class ShyGuy {  //Skill #28
   
   PVector pos;  //Skill #38
+  PVector speed;  //Skill #39
   float newX;
   float y;
-  float upGoal;
-  float downGoal;
   boolean moveDown = false;
   boolean moveUp = false;
   boolean hit;
@@ -26,28 +25,23 @@ class ShyGuy {  //Skill #28
     switch(level){
       case "top":
         y = 150;
-        upGoal = 103;
-        downGoal = 150;
+        speed = new PVector(103, 150);
         break;
       case "mid":
         y = 240;
-        upGoal = 193;
-        downGoal = 240;
+        speed = new PVector(193, 240);
         break;
       case "bot":
         y = 331;
-        upGoal = 284;
-        downGoal = 331;
+        speed = new PVector(284, 331);
         break;
       case "floor":
         y = 420;
-        upGoal = 373;
-        downGoal = 420;
+        speed = new PVector(373, 420);
         break;
       default:
         y = 274;
-        upGoal = 0;
-        downGoal = 0;
+        speed = new PVector(0, 0);
       }
       
    }
@@ -121,16 +115,16 @@ class ShyGuy {  //Skill #28
     }
     
     
-    if (moveUp && y > upGoal){
+    if (moveUp && y > speed.x){
       y--;  //Skill #8
-    } else if (moveUp && y == upGoal){
+    } else if (moveUp && y == speed.x){
       moveUp = false;
       hidden = false;
     }
     
-    if (moveDown && y < downGoal){
+    if (moveDown && y < speed.y){
       y++;
-    } else if (moveDown && y == downGoal){
+    } else if (moveDown && y == speed.y){
       moveDown = false;
       hidden = true;
       
@@ -140,17 +134,16 @@ class ShyGuy {  //Skill #28
 
     }
 
-   
-   
-   /*
-    switch (Level){
+
+  /*
+   switch (Level){
       case "mid":
-        for (ShyGuy part : shyguysMid){
-          if(pos.x != part.pos.x){ 
+        for (ShyGuy part : shyguysBot){
+          //if(pos.x != part.pos.x){ 
             if ((pos.x < part.pos.x + 10) && (pos.x > part.pos.x - 10)){
               newX = random(50, 350);
             }
-          }
+          //}
         }
         break;
         
@@ -164,16 +157,18 @@ class ShyGuy {  //Skill #28
         }
         break;
     }
-  
+   
    */
+
+   
 
   }
   
 
-
   
   float randomizeX(){   //Skill #21
-    newX = random(50, 350);   
+    newX = random(50, 350);
+    
     return newX;
   }
   
