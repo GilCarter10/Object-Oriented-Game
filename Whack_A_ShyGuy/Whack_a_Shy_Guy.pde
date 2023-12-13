@@ -8,10 +8,10 @@ String gameState = "menu";
 String colour = "red";
 float mX;
 float mY;
-PVector random = PVector.random2D();  //Skill #41
+PVector offset = PVector.random2D();  //Skill #41
 ArrayList<ShyGuy> shyguysTop = new ArrayList<ShyGuy>();  //Skill #34
 ArrayList<ShyGuy> shyguysMid = new ArrayList<ShyGuy>();
-ArrayList<ShyGuy> shyguysBot = new ArrayList<ShyGuy>();
+ArrayList<ShyGuy> shyguysBot = new ArrayList<ShyGuy>();  // one ArrayList for each layer
 ArrayList<ShyGuy> shyguysFloor = new ArrayList<ShyGuy>();
 ShyGuy shyguyMenu = new ShyGuy();
 
@@ -20,23 +20,24 @@ void setup(){  //Skill #4
   size(400, 400);
   background(60, 162, 240);  //Skill #5
   frameCount = 60;
-  multiplyVector(random);
+  multiplyVector(offset); //multiplies the PVector to offset menu shy guy
   
-  shyguyMenu.prep(" ");
+  shyguyMenu.prep(" ");  //preps the shy guy at the menu
   
   //Skill #17
   for (int i = 0; i < 1; i++){  //Skill #9
     shyguysTop.add(new ShyGuy()); //Skill #34
     shyguysFloor.add(new ShyGuy());
     shyguysMid.add(new ShyGuy());
-    shyguysBot.add(new ShyGuy());
+    shyguysBot.add(new ShyGuy()); //adds one shy guy to each layer
     for (int j = 0; j < 2; j++){
-      shyguysMid.add(new ShyGuy());
+      shyguysMid.add(new ShyGuy()); //adds two shy guys to the middle and bottom layer
       shyguysBot.add(new ShyGuy());
-
+      
     }
   }
-  
+   
+  //prep and randomize the X of each shy guy in each list
   for (ShyGuy part : shyguysTop) {  //Skill #16
     part.prep("top"); //Skill #35
     part.randomizeX();
@@ -57,6 +58,8 @@ void setup(){  //Skill #4
 }
 
 void draw(){
+
+  //switch statement for all 4 game states
   switch (gameState) {  //Skill #15
     case "menu":
       drawMenu();
@@ -76,17 +79,20 @@ void draw(){
 void drawMenu(){  //Skill #20
   background(60, 162, 240);
   drawLayer(300);
-  changeColour(shyguyMenu);
-  shyguyMenu.show(90);
+  changeColour(shyguyMenu); //sets the colour of menu shy guy
+  shyguyMenu.show(200 + offset.x);  //draws menu shy guy
   shyguyMenu.hit = false;
   shyguyMenu.moveUp = false;
   totalShyGuys = shyguysTop.size() + shyguysMid.size() + shyguysBot.size() + shyguysFloor.size(); //Skill #36
+  
   textSize(40);
-  text("Whack a Shy Guy", 63, 100);
+  text("Whack a Shy Guy", 63, 70);
+  textSize(17);
+  text("Go for a headshot to get a special bonus!", 64, 100);
+  text("Can you get all " + totalShyGuys + " of them?", 109, 120);
   textSize(20);
-  text("Can you get all " + totalShyGuys + " of them?", 94, 130);
-  text("Highscore: " + highscore, 151, 175);
-  text("Click to start", 150, 240);
+  text("Highscore: " + highscore, 151, 145);
+  text("Click to start", 150, 210);
   
 }
 
@@ -99,35 +105,39 @@ void drawPlay(){
   text("Score: "+ score, 10, 20); 
   text("Misses: "+ misses, 100, 20); 
   
-
+  //shows all shy guys in each list and sets all of thier colours
   for (ShyGuy part : shyguysTop) {
     changeColour(part);
     part.show(part.newX);  //Skill #29
   }
   
-  drawLayer(130); //top
+  drawLayer(130); //top layer
   
   for (ShyGuy part : shyguysMid) {
     changeColour(part);
     part.show(part.newX); 
   }
   
-  drawLayer(220); //medium
+  drawLayer(220); //middle layer
 
   for (ShyGuy part : shyguysBot) {
     changeColour(part);  
     part.show(part.newX);
   }
   
-  drawLayer(310); //bottom
+  drawLayer(310); //bottom layer
 
   for (ShyGuy part : shyguysFloor) {
     changeColour(part);    
     part.show(part.newX);
   }
   
+  //variables to hold mouse values
   mX = constrain(mouseX, 30, 370);  //Skill #6
   mY = constrain(mouseY, 30, 370);
+  
+  
+  //crosshair
   ellipseMode(CENTER);
   stroke(0, 255, 0);
   strokeWeight(1.5);
@@ -137,11 +147,12 @@ void drawPlay(){
   line(mX+20, mY, mX-20, mY);
   
   
-  
+  //timer
   if (keepTime < 600){  //Skill #13
-    keepTime ++;
+    keepTime ++;  //if timer variable less than 600 (10s), increase timer variable
   }
   if (keepTime == 180){ //Skill #12
+    // if time is 180 (3s), move all the shy guys up
     for (ShyGuy part : shyguysTop) {
       part.moveUp = true;
     }
@@ -156,6 +167,7 @@ void drawPlay(){
     }
     
   } else if (keepTime == 600){
+    //if time is 600 (10s), move all shy guys down who aren't already and add a miss to the counter
     for (ShyGuy part : shyguysTop) {
       if (part.hidden == false){
         part.moveDown = true;
@@ -180,7 +192,7 @@ void drawPlay(){
         misses += 1;
       }
     }
-    keepTime = 0;
+    keepTime = 0; //reset timer variable (restarts the loop)
   }
   
   
@@ -196,6 +208,7 @@ void drawPlay(){
 
 
 void drawGameOver(){
+  //draw the game over screen and reset variables
   background(60, 162, 240);
   drawLayer(300);
   changeColour(shyguyMenu);
@@ -211,9 +224,10 @@ void drawGameOver(){
 }
 
 void drawColourMenu(){
+  // draw the screen for the colour change menu
   background(60, 162, 240);
   drawLayer(300);
-  changeColour(shyguyMenu);
+  changeColour(shyguyMenu); //use shy guy form menu screen as the model for the colour change screen (his colours will change as the player selects them)
   shyguyMenu.show(200);
   shyguyMenu.hit = false;
   textSize(40);
@@ -232,6 +246,7 @@ void drawColourMenu(){
 
 
 void drawLayer(int y){
+  //function to draw the layers of the earth that shy guys hide behind
   fill(209, 188, 144);
   noStroke();
   rectMode(CORNER);
@@ -268,6 +283,7 @@ void drawSun(){
 
 
 void changeColour(ShyGuy part){  //Skill #24
+  //changes colour of the shy guys by passing by reference
   switch (colour) {
     case "red":
       part.colourCodes = part.red;
@@ -296,6 +312,8 @@ void changeColour(ShyGuy part){  //Skill #24
 
 void mousePressed() {  //Skill #7
   if (gameState == "play"){
+    //check to see if a shy guy is in range when the mouse is pressed
+    //if so, move them down and increase score
     for (ShyGuy part : shyguysTop) {
       if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false && part.hidden == false) {    //Skill #14
         score += 1;
@@ -329,7 +347,8 @@ void mousePressed() {  //Skill #7
       }
     }
     
-    
+    //check to see if a shy guy is headshotted
+    //if so, give the headshot bonus
     for (ShyGuy part : shyguysTop) {
       if (dist(part.pos.x, part.pos.y, mouseX, mouseY) < 13) {   //Skill 40
         score += 2;
@@ -363,7 +382,9 @@ void mousePressed() {  //Skill #7
         part.hit = true;
       }
     }
+    
   } else if (gameState == "menu"){
+    //if mouse is pressed on the menu screen, begin the game
     gameState = "play";
   }
   
@@ -371,10 +392,13 @@ void mousePressed() {  //Skill #7
 
 void keyPressed() {
   if (gameState == "gameOver" && key == ' '){
+    //if space is pressed on game over screen return to menu
     gameState = "menu";
   } else if (gameState == "gameOver" && (key == 'c' || key == 'C')){
+    //if c is pressed on game over screen go to colour change menu
     gameState = "colourMenu";
   } else if (gameState == "colourMenu"){
+    //checks for all key presses on the colour change menu
     if (key == ' '){
       gameState = "menu";
     }
@@ -403,5 +427,6 @@ void keyPressed() {
 }
 
 void multiplyVector(PVector x){  //Skill #23
-  x.mult(2); //Skill #43
+  x.mult(100); //Skill #43
+  //multiplies the offset PVector so the shyguy on menu screen is at a different spot in each bootup
 }

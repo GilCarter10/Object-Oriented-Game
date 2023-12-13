@@ -16,12 +16,12 @@ class ShyGuy {  //Skill #28
   int[] black = { 55, 55, 55 };
   int[] purple = { 125, 32, 201 };
   int[] orange = { 235, 165, 26 };
-  int[] grey = { 115, 115, 115 };
+  int[] grey = { 115, 115, 115 }; //arrays for colour changes
   int[] salmon = { 230, 165, 189 };
   
   void prep(String level){  //Skill #30
     frameRate(100);
-    Level = level;
+    Level = level; //level is a variable assigned to shy guys that lets me know what height they are standing at
     switch(level){
       case "top":
         y = 150;
@@ -49,6 +49,7 @@ class ShyGuy {  //Skill #28
   void show(float x){
     pos = new PVector(x, y);
     
+    //draw shy guy with corrosponding colour
     fill(colourCodes[0], colourCodes[1], colourCodes[2]);  //Skill #2
     rect(pos.x - 13.5, pos.y, 30, 27);  //Skill #1
     ellipseMode(CORNER);  //Skill #3
@@ -82,6 +83,7 @@ class ShyGuy {  //Skill #28
 
     
     if (hit){
+      //draw shy guy with X's over eyes
       fill(colourCodes[0], colourCodes[1], colourCodes[2]);
       rect(pos.x - 13.5, pos.y, 30, 27);
       ellipseMode(CORNER);
@@ -115,7 +117,8 @@ class ShyGuy {  //Skill #28
     }
     
     
-    if (moveUp && y > speed.x){
+    if (moveUp && y > speed.x){ //speed PVector here represents the "up goal" and "down goal" the shy guy is trying to go to
+      //move up while below the desired position
       y--;  //Skill #8
     } else if (moveUp && y == speed.x){
       moveUp = false;
@@ -123,11 +126,12 @@ class ShyGuy {  //Skill #28
     }
     
     if (moveDown && y < speed.y){
+      //move down while below the desired position
       y++;
+      hidden = true;
     } else if (moveDown && y == speed.y){
       moveDown = false;
-      hidden = true;
-      
+     
       //RESET
       randomizeX();
       hit = false;
@@ -139,6 +143,7 @@ class ShyGuy {  //Skill #28
 
   
   float randomizeX(){   //Skill #21
+    //randomize the x value of the shy guy and return the new value
     newX = random(50, 350);
     
     return newX;
