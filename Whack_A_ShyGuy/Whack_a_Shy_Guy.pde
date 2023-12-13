@@ -1,3 +1,7 @@
+//Whack a Shy Guy
+//By Gil Carter
+
+
 //variables
 int score = 0;  //Skill #10
 int highscore = 0;

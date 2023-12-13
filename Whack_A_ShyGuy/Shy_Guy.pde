@@ -1,6 +1,6 @@
 
 class ShyGuy {  //Skill #28
-  
+   
   PVector pos;  //Skill #38
   PVector speed;  //Skill #39
   float newX;
