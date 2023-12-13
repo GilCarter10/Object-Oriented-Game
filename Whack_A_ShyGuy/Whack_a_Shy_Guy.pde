@@ -4,11 +4,11 @@ int highscore = 0;
 int misses = 0;
 int keepTime = 0;
 int totalShyGuys;
-boolean beenClicked;
 String gameState = "menu";
 String colour = "red";
 float mX;
 float mY;
+PVector random = PVector.random2D();  //Skill #41
 ArrayList<ShyGuy> shyguysTop = new ArrayList<ShyGuy>();  //Skill #34
 ArrayList<ShyGuy> shyguysMid = new ArrayList<ShyGuy>();
 ArrayList<ShyGuy> shyguysBot = new ArrayList<ShyGuy>();
@@ -20,6 +20,7 @@ void setup(){  //Skill #4
   size(400, 400);
   background(60, 162, 240);  //Skill #5
   frameCount = 60;
+  multiplyVector(random);
   
   shyguyMenu.prep(" ");
   
@@ -135,18 +136,12 @@ void drawPlay(){
   line(mX, mY-20, mX, mY+20);
   line(mX+20, mY, mX-20, mY);
   
-  if (beenClicked){  //Skill #12
-    //score += 1;
-    beenClicked = false;
-    println("I've been clicked!");  //Skill #11
-  }
-  
   
   
   if (keepTime < 600){  //Skill #13
     keepTime ++;
   }
-  if (keepTime == 180){
+  if (keepTime == 180){ //Skill #12
     for (ShyGuy part : shyguysTop) {
       part.moveUp = true;
     }
@@ -304,7 +299,7 @@ void mousePressed() {  //Skill #7
     for (ShyGuy part : shyguysTop) {
       if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false && part.hidden == false) {    //Skill #14
         score += 1;
-        beenClicked = true;
+        println("I've been clicked!");
         part.moveDown = true;
         part.hit = true;
       }
@@ -312,7 +307,7 @@ void mousePressed() {  //Skill #7
     for (ShyGuy part : shyguysMid) {
       if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false && part.hidden == false) {    
         score += 1;
-        beenClicked = true;
+        println("I've been clicked!");
         part.moveDown = true;
         part.hit = true;
       }
@@ -320,7 +315,7 @@ void mousePressed() {  //Skill #7
     for (ShyGuy part : shyguysBot) {
       if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false && part.hidden == false) {    
         score += 1;
-        beenClicked = true;
+        println("I've been clicked!");
         part.moveDown = true;
         part.hit = true;
       }
@@ -328,7 +323,7 @@ void mousePressed() {  //Skill #7
     for (ShyGuy part : shyguysFloor) {
       if (mouseX >= part.pos.x-15 && mouseX <= part.pos.x - 15 + 30 && mouseY >= part.pos.y-20 && mouseY <= part.pos.y-20 + 46 && part.moveDown == false && part.hidden == false) {    
         score += 1;
-        beenClicked = true;
+        println("I've been clicked!");
         part.moveDown = true;
         part.hit = true;
       }
@@ -338,7 +333,7 @@ void mousePressed() {  //Skill #7
     for (ShyGuy part : shyguysTop) {
       if (dist(part.pos.x, part.pos.y, mouseX, mouseY) < 13) {   //Skill 40
         score += 2;
-        beenClicked = true;
+        println("I've been clicked!");
         part.moveDown = true;
         part.hit = true;
         println("shaun");
@@ -347,7 +342,7 @@ void mousePressed() {  //Skill #7
     for (ShyGuy part : shyguysMid) {
       if (dist(part.pos.x, part.pos.y, mouseX, mouseY) < 13) {    
         score += 2;
-        beenClicked = true;
+        println("I've been clicked!");
         part.moveDown = true;
         part.hit = true;
       }
@@ -355,7 +350,7 @@ void mousePressed() {  //Skill #7
     for (ShyGuy part : shyguysBot) {
       if (dist(part.pos.x, part.pos.y, mouseX, mouseY) < 13) {    
         score += 2;
-        beenClicked = true;
+        println("I've been clicked!");
         part.moveDown = true;
         part.hit = true;
       }
@@ -363,7 +358,7 @@ void mousePressed() {  //Skill #7
     for (ShyGuy part : shyguysFloor) {
       if (dist(part.pos.x, part.pos.y, mouseX, mouseY) < 13) {    
         score += 2;
-        beenClicked = true;
+        println("I've been clicked!");
         part.moveDown = true;
         part.hit = true;
       }
@@ -405,4 +400,8 @@ void keyPressed() {
       colour = "salmon";
     }
   }
+}
+
+void multiplyVector(PVector x){  //Skill #23
+  x.mult(2); //Skill #43
 }

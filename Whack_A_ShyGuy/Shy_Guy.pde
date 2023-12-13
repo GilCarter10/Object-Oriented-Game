@@ -134,34 +134,6 @@ class ShyGuy {  //Skill #28
 
     }
 
-
-  /*
-   switch (Level){
-      case "mid":
-        for (ShyGuy part : shyguysBot){
-          //if(pos.x != part.pos.x){ 
-            if ((pos.x < part.pos.x + 10) && (pos.x > part.pos.x - 10)){
-              newX = random(50, 350);
-            }
-          //}
-        }
-        break;
-        
-      case "bot":
-        for (ShyGuy part : shyguysBot){
-          if(pos.x != part.pos.x){ 
-            if ((pos.x < part.pos.x + 10) && (pos.x > part.pos.x - 10)){
-              newX = random(50, 350);
-            }
-          }
-        }
-        break;
-    }
-   
-   */
-
-   
-
   }
   
 
