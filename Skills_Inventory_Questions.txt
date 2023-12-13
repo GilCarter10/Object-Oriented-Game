@@ -14,9 +14,9 @@ A class is different from an object because a class is the template or guideline
 class that defines its traits and boundaries. To use a common anolgy, the class would be the cookie cutter and the objects are the cookies.
 
 Skill #26: What is a constructor function? What does it do and when?
-A constructor function is a function/method within a class that you are able to call for a specific object. Constructor functions are assigned to a specific class.
-Constructor functions are excecuted whenever they are called but must always be called through the object beign referred to. For example, a class with a constructor function
-update() would be called by saying: objectName.update()
+A constructor function is the function/method that is used to instantiate or "construct" a class. The name of the constrictor function becomes 
+the name of the class and it must begin with a capital letter. A constructor function is it's own funciton so it is called outside of setup or draw. 
+Most commonly it is at the beginning of the file/tab for that specific class
 
 Skill #27: Why should each class have its own tab in Processing?
 Each class in your Processing project should have its own tab because it is more organized and much easier to access. When all code, classes, 
@@ -40,4 +40,4 @@ PVectors can be two or three dimensional to fit your needs.
 Skill #42: What is a normalized vector, why is it useful?
 A normalized vector when a vector is normalized and its magnitude is reduced to 1 while it's direction stays the same. This can be useful because it 
 is not only a directional value with no magnitude values. This can be useful when referencing directions to move in as you are able to easily scale 
-it since magnitude is not a problem and it only represents direction
+it since magnitude is not a problem and it only represents direction.
